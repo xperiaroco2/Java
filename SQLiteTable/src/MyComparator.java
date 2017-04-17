@@ -1,0 +1,17 @@
+import java.util.Comparator;
+
+/**
+ * Created by h on 17.04.2017.
+ */
+public class MyComparator implements Comparator{
+    @Override
+    public int compare(Object o1, Object o2) {
+        Double i1 = Double.valueOf(o1.toString()).doubleValue();
+        Double i2 = Double.valueOf(o2.toString()).doubleValue();
+
+        if(i1<i2) return 1;
+        else if (i1>i2) return -1;
+
+        return 0;
+    }
+}
