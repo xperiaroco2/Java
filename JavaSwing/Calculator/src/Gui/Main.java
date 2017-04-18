@@ -1,8 +1,9 @@
-import com.jtattoo.plaf.JTattooUtilities;
+package Gui;
+
+import Listeners.ButtonListener;
 import com.jtattoo.plaf.smart.SmartLookAndFeel;
 
 import javax.swing.*;
-import javax.swing.plaf.metal.MetalLookAndFeel;
 import java.awt.*;
 
 
@@ -51,6 +52,8 @@ public class Main {
         buttonSubtract = new MyJButton("Вычитание");
         buttonDivide = new MyJButton("Деление");
         buttonMultiply = new MyJButton("Умножение");
+        buttonAdd.addActionListener(new ButtonListener(panel2));
+
     }
 
     private void createLabels(){
@@ -105,6 +108,8 @@ public class Main {
 
         frame.setVisible(true);
     }
+
+
 
 
 
