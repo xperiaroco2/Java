@@ -1,7 +1,9 @@
 package Gui;
 
-import Listeners.ButtonListener;
+import Listeners.CalcButtonActionListener;
+import Listeners.CalcTextFieldFocusListener;
 import com.jtattoo.plaf.smart.SmartLookAndFeel;
+import calc.CalcOperations;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +11,7 @@ import java.awt.*;
 
 public class Main {
 
+    public static final String INPUT_INT = "Введите число";
 
     private MyJButton buttonAdd;
     private MyJButton buttonSubtract;
@@ -37,6 +40,8 @@ public class Main {
 
         JFrame.setDefaultLookAndFeelDecorated(true);
 
+
+
         Main main = new Main();
 
         main.createLabels();
@@ -47,13 +52,19 @@ public class Main {
 
     }
 
+
+    //<editor-fold desc="Create GUI">
     private void createButtons(){
         buttonAdd = new MyJButton("Сложение");
         buttonSubtract = new MyJButton("Вычитание");
         buttonDivide = new MyJButton("Деление");
         buttonMultiply = new MyJButton("Умножение");
-        buttonAdd.addActionListener(new ButtonListener(panel2));
+        buttonAdd.addActionListener(new CalcButtonActionListener(jtxt1,jtxt2,jtxtResult));
+        buttonSubtract.addActionListener(new CalcButtonActionListener(jtxt1,jtxt2,jtxtResult));
+        buttonMultiply.addActionListener(new CalcButtonActionListener(jtxt1,jtxt2,jtxtResult));
+        buttonDivide.addActionListener(new CalcButtonActionListener(jtxt1,jtxt2,jtxtResult));
 
+        addButtonListeners();
     }
 
     private void createLabels(){
@@ -63,12 +74,14 @@ public class Main {
     }
 
     private void createTextFields(){
-        jtxt1 = new MyJTextField(10);
-        jtxt2 = new MyJTextField(10);
+        jtxt1 = new MyJTextField(INPUT_INT,10);
+        jtxt2 = new MyJTextField(INPUT_INT,10);
 
         jtxtResult = new MyJTextField(15, Color.red);
         jtxtResult.setEditable(false);
         jtxtResult.setFocusable(false);
+
+        addTextFieldListeners();
     }
 
     private void createPanels(){
@@ -108,9 +121,24 @@ public class Main {
 
         frame.setVisible(true);
     }
+    //</editor-fold>
 
 
+    //<editor-fold desc="Listeners">
+    private void addButtonListeners(){
+        CalcButtonActionListener b1 = new CalcButtonActionListener(jtxt1,jtxt2,jtxtResult);
 
+        buttonAdd.addActionListener(b1);
+        buttonDivide.addActionListener(b1);
+        buttonMultiply.addActionListener(b1);
+        buttonSubtract.addActionListener(b1);
+    }
+
+    private void addTextFieldListeners(){
+        jtxt1.addFocusListener(new CalcTextFieldFocusListener(jtxt1));
+        jtxt2.addFocusListener(new CalcTextFieldFocusListener(jtxt2));
+    }
+    //</editor-fold>
 
 
 }
